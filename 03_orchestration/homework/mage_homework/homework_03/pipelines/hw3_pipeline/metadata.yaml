@@ -1,0 +1,141 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: homework_03/data_loaders/taxi_data_loader.py
+  downstream_blocks:
+  - data_preparation
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: taxi_data_loader
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: taxi_data_loader
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: homework_03/transformers/data_preparation.py
+  downstream_blocks:
+  - data_preparation_table_s5
+  - summary_overview_for_taxi_data_loader
+  - model_trainer
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: data_preparation
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - taxi_data_loader
+  uuid: data_preparation
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: homework_03/transformers/model_trainer.py
+  downstream_blocks:
+  - experiment_tracking
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: model_trainer
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - data_preparation
+  uuid: model_trainer
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: homework_03/data_exporters/experiment_tracking.py
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: experiment_tracking
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - model_trainer
+  uuid: experiment_tracking
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-06-07 03:20:47.098187+00:00'
+data_integration: null
+description: tasks asked in hm3 of mlops zoomcamp course
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: hw3-pipeline
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: hw3_pipeline
+variables_dir: /home/src/mage_data/homework_03
+widgets:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_type: table
+    height: 3000
+    index: stats
+    x: headers
+    y: rows
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: summary overview for taxi_data_loader
+  retry_config: null
+  status: executed
+  timeout: null
+  type: chart
+  upstream_blocks:
+  - data_preparation
+  uuid: summary_overview_for_taxi_data_loader
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    chart_type: table
+    limit: 10
+    x: x
+    y: y
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: data_preparation_table_s5
+  retry_config: null
+  status: failed
+  timeout: null
+  type: chart
+  upstream_blocks: []
+  uuid: data_preparation_table_s5
